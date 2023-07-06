@@ -9,6 +9,10 @@ router.get("/", (req,res)=>{
     cancionController.getAll(req,res);
 });
 
+router.get("/canciones2", (req,res)=>{
+    cancionController.getAll2(req,res);
+});
+
 /*
 * obtener la cancion con id específico
 */

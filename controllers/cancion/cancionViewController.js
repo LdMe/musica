@@ -5,6 +5,11 @@ async function getAll(req,res){
     res.render("cancion/list",{canciones:result});
 }
 
+async function getAll2(req,res){
+    let result = await cancionController.getAll2();
+    res.send(result);
+}
+
 async function getById(req,res){
     let {id} = req.params;
     let result = await cancionController.getById(id);
@@ -13,5 +18,7 @@ async function getById(req,res){
 
 export default {
     getAll,
-    getById
+    getAll2,
+    getById,
+
 }

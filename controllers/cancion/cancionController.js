@@ -1,4 +1,7 @@
 import { getAllSongs,getSongById } from "../../models/cancion.js";
+import Cancion from "../../models/cancion2.js";
+import Genero from "../../models/genero.js";
+import Album from "../../models/album.js";
 
 async function getAll(){
     let result = await getAllSongs();
@@ -25,6 +28,23 @@ async function getAll(){
     return cancionesSet;
 }
 
+async function getAll2(){
+    let result = await Cancion.findAll({
+        include: {
+            model: Genero,
+            attributes: ["nombre"],
+        },
+        include: {
+            model: Album,
+            attributes: ["album_id", "nombre", "fecha_creacion"],
+        },
+        attributes: ["cancion_id", "titulo", "duracion"],
+    });
+    let canciones = result.map((row)=>row);
+    return canciones;
+}
+
+
 async function getById(id){
     let result = await getSongById(id);
     console.log("resultado: ",result);
@@ -40,6 +60,7 @@ async function getById(id){
 
 export default {
     getAll,
+    getAll2,
     getById
 }
 

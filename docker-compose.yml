@@ -1,0 +1,41 @@
+#docker-compose que crea un servidor mysql y un servidor de nodejs
+# leeremos los datos DB_HOST,DB_PORT,DB_USER,DB_PASSWORD,DB_NAME desde el archivo .env
+# para crear el archivo .env ejecutar el comando cp .env.example .env
+# ejecutamos los scripts que se encuentran en la carpeta mysql (musicos_structure.sql y musicos_data.sql)
+
+version: '3'
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: ${DB_HOST}
+    environment:
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    ports:
+      - ${DB_PORT}:3306
+    volumes:
+      - ./db:/var/lib/mysql
+      - ./mysql/musicos_structure.sql:/docker-entrypoint-initdb.d/1musicos_structure.sql
+      - ./mysql/musicos_data.sql:/docker-entrypoint-initdb.d/2musicos_data.sql
+    networks:
+      - app-network
+  app:
+    build: .
+    container_name: ${APP_HOST}
+    ports:
+      - ${APP_PORT}:3000
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+  
+networks:
+  app-network:
+    driver: bridge
+
