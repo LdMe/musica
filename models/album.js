@@ -38,8 +38,8 @@ const Album = connection.define(
         }
     },
     {
-        timestamps: false,
-        freezeTableName: true,
+        
+        
     }
 );
 

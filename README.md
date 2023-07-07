@@ -1,1 +1,3 @@
 # musica
+
+docker compose up

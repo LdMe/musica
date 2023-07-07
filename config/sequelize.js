@@ -3,14 +3,18 @@
 */
 
 import  Sequelize  from "sequelize";
+import dotenv from "dotenv";
 
-const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
-host:process.env.DB_HOST,
+dotenv.config();
+const dbHost = process.env.DB_IS_LOCAL==="true" ? process.env.DB_HOST : process.env.DB_REMOTE_HOST;
+const connection = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+host:dbHost,
 port:3306,
 dialect: "mysql",
 define: {
-    timestamps: false
+    timestamps: false,
+    freezeTableName: true,
   },
 });
 
-export default sequelize;
+export default connection;

@@ -40,8 +40,7 @@ async function getAll2(){
         },
         attributes: ["cancion_id", "titulo", "duracion"],
     });
-    let canciones = result.map((row)=>row);
-    return canciones;
+    return result;
 }
 
 

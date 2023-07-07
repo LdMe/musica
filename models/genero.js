@@ -1,24 +1,20 @@
 import connection from "../config/sequelize.js";
-import Sequelize from "sequelize";
+import {DataTypes} from "sequelize";
 
 const Genero = connection.define(
   "genero",
   {
     genero_id: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         unsigned: true,
         primaryKey: true,
         autoIncrement: true,
     },
     nombre: {
-        type: Sequelize.STRING(45),
+        type: DataTypes.STRING(45),
         allowNull: false,
     }
-},
-    {
-        timestamps: false,
-        freezeTableName: true,
-    }
+}
 );
 
 export default Genero;
