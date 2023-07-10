@@ -60,14 +60,23 @@ const usuarioController = {
             if (!iguales) {
                 throw new Error("La contraseña no es correcta");
             }
-            res.send("Usuario logueado");
+
+            // Guardar la sesión
+            req.session.usuario = usuarioGuardado;
+
+            res.redirect("/cancion");
 
         }
         catch (error) {
             res.render("usuario/login", { error: error.message });
         }
+    },
+
+    logout: (req, res) => {
+        // Borrar la sesión
+        req.session.usuario = null;
+        res.redirect("/login");
     }
 }
-
 
 export default usuarioController;

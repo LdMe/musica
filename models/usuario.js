@@ -19,10 +19,6 @@ const Usuario = connection.define(
             allowNull: false,
         }
         
-    },
-    {
-        
-        
     }
 );
 
