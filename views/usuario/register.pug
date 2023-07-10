@@ -1,0 +1,17 @@
+
+extends ../layout 
+
+block content
+    if error 
+        p= error
+    form(action="/usuario/register", method="post") 
+        label(for="username") Usuario
+        input(type="text", name="username", id="username")
+        br
+        label(for="password") Contraseña
+        input(type="password", name="password", id="password")
+        br
+        label(for="password_repeat") Contraseña
+        input(type="password", name="password_repeat", id="password_repeat")
+        br
+        input(type="submit", value="Registrar")
