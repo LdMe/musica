@@ -21,6 +21,7 @@
     "mysql2": "^3.4.5",
     "nodemon": "^2.0.22",
     "pug": "^3.0.2",
-    "sequelize": "^6.32.1"
+    "sequelize": "^6.32.1",
+    "swagger-ui-express": "^5.0.0"
   }
 }

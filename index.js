@@ -4,13 +4,17 @@ import router from "./routes/router.js";
 import andaluh from "@andalugeeks/andaluh";
 import session from "express-session";
 import cors from "cors";
-
+import swaggerUi from "swagger-ui-express";
+import * as swaggerDocument from "./swagger.js"
 const app = express();
 
 app.use(cors());
 
 app.use(express.urlencoded({extended: true})); // Para que express pueda procesar los datos recibidos en formularios
 app.use(express.json()); // Para que express pueda procesar los datos recibidos en formato JSON
+console.log("document",swaggerDocument);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument.default));
+
 
 app.use(session(
     {
