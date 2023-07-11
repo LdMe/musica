@@ -6,4 +6,16 @@ html(lang="en")
         title Página de Canciones
         link(rel="stylesheet", href="/css/estilos.css")
     body 
+        nav 
+            ul 
+                li 
+                    a(href="/cancion") Canciones
+                if !session.usuario
+                    li 
+                        a(href="/login") Login
+                    li 
+                        a(href="/register") Registro
+                else
+                    li 
+                        a(href="/logout") Logout
         block content

@@ -25,16 +25,12 @@ const Cancion = connection.define(
         type: Sequelize.INTEGER,
         unsigned: true,
         allowNull: false,
-        references: {
-            model: "genero",
-            key: "genero_id"
-        }
     }
   }
 );
 
-Cancion.belongsTo(Genero);
-Genero.hasMany(Cancion);
+Cancion.belongsTo(Genero, {foreignKey: "genero_id"});
+Genero.hasMany(Cancion, {foreignKey: "genero_id"});
 
 // many to many usando la tabla intermedia cancion_has_album
 

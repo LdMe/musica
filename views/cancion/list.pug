@@ -1,14 +1,15 @@
-include ../layout
+extends ../layout
 
 block content
     h1 Lista de canciones 
     each cancion in canciones
-        article(id=cancion.cancion_id, class="cancion")
-            h2(class="titulo-cancion otra_clase")= cancion.titulo
-            p= "Duración:" + cancion.duracion 
-            h3="Álbumes:"
-            ul 
-                each album in cancion.albumes
-                    li= album
-            p="Género: " + cancion.genero
+        a(href="/cancion/" + cancion.cancion_id)
+            article(id=cancion.cancion_id, class="cancion")
+                h2(class="titulo-cancion otra_clase")= cancion.titulo
+                p= "Duración:" + cancion.duracion 
+                h3="Álbumes:"
+                ul 
+                    each album in cancion.albums
+                        li= album.nombre
+                p="Género: " + cancion.genero.nombre
     script(type="module", src="/js/cancion.js") 

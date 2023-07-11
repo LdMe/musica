@@ -36,10 +36,6 @@ const Album = connection.define(
             unsigned: true,
             allowNull: false,
         }
-    },
-    {
-        
-        
     }
 );
 

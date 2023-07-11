@@ -2,11 +2,32 @@
 import express from "express";
 import router from "./routes/router.js";
 import andaluh from "@andalugeeks/andaluh";
+import session from "express-session";
+import cors from "cors";
 
 const app = express();
 
-app.use(express.urlencoded({extended: true}));
-app.use(express.json()) 
+app.use(cors());
+
+app.use(express.urlencoded({extended: true})); // Para que express pueda procesar los datos recibidos en formularios
+app.use(express.json()); // Para que express pueda procesar los datos recibidos en formato JSON
+
+app.use(session(
+    {
+    secret: process.env.SESSION_SECRET, // Clave de encriptación de las cookies (puede ser cualquier string)
+    resave: true, // No guardar la sesión en cada petición si no hay cambios
+    saveUninitialized: false, // No crear automáticamente una sesión vacía para cada petición
+    cookie: { 
+        secure: false, // La cookie se debe enviar sólo sobre HTTPS (true) o también sobre HTTP (false)
+        maxAge: 1000 * 60  * 1// Caducidad de la cookie: 2 minutos
+    }, 
+    
+}));
+
+app.use(function(req,res,next){ // Middleware para pasar datos a las vistas
+    res.locals.session = req.session;
+    next();
+});
 
 app.use(express.static('public'))
 app.set('views', './views');

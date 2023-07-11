@@ -11,7 +11,7 @@ async function getAll(){
             titulo:row.titulo,
             duracion:row.duracion,
             genero:row.nombre_genero,
-            albumes: result.filter((row2)=>row2.cancion_id == row.cancion_id).map((row2)=>row2.album)
+            albums: result.filter((row2)=>row2.cancion_id == row.cancion_id).map((row2)=>row2.album)
         }
         return cancion;
     });
@@ -30,14 +30,16 @@ async function getAll(){
 
 async function getAll2(){
     let result = await Cancion.findAll({
-        include: {
-            model: Genero,
-            attributes: ["nombre"],
-        },
-        include: {
+        include: [
+            {
             model: Album,
+            through: { attributes: [] },
             attributes: ["album_id", "nombre", "fecha_creacion"],
         },
+        {
+            model: Genero,
+            attributes: ["nombre"],
+        }],
         attributes: ["cancion_id", "titulo", "duracion"],
     });
     return result;
@@ -57,9 +59,31 @@ async function getById(id){
     return [cancion];
 }
 
+async function getById2(id){
+    let result = await Cancion.findAll({
+        include: [
+            {
+            model: Album,
+            through: { attributes: [] },
+            attributes: ["album_id", "nombre", "fecha_creacion"],
+        },
+        {
+            model: Genero,
+            attributes: ["nombre"],
+        }],
+        attributes: ["cancion_id", "titulo", "duracion"],
+        where: {
+            cancion_id: id,
+        },
+    });
+    console.log("resultado: ",result)
+    return result;
+}
+
 export default {
     getAll,
     getAll2,
-    getById
+    getById,
+    getById2,
 }
 
