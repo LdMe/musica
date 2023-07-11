@@ -1,4 +1,4 @@
-
+import jwt from "jsonwebtoken";
 
 const loggedInMiddleware = (req, res, next) => {
 

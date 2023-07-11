@@ -1,9 +1,9 @@
-import cancionController from '../../controllers/cancionController.js';
+import cancionController from './cancionController.js';
 
 
 const getAll = async (req, res) => {
     let result = await cancionController.getAll2();
-    res.json(result);
+    res.send(result);
 }
 
 

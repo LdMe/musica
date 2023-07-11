@@ -10,7 +10,7 @@ html(lang="en")
             ul 
                 li 
                     a(href="/cancion") Canciones
-                if !user 
+                if !session.usuario
                     li 
                         a(href="/login") Login
                     li 

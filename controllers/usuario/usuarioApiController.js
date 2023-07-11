@@ -39,10 +39,13 @@ export default {
       }
 
       // Generar token JWT
-      let payload = { id: usuarioGuardado.id, username };
+      let payload = { 
+        id: usuarioGuardado.usuario_id,
+        username : username
+      };
       let token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1h" });
 
-      return res.status(200).json({
+      return res.send({
         token,
       });
     } catch (error) {
