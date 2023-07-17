@@ -14,8 +14,15 @@ const getById = async (req, res) => {
     res.json(result);
 }
 
+const createSong = async (req, res) => {
+    let cancion = req.body;
+    let result = await cancionController.createSong(cancion);
+    res.json(result);
+}
+
 
 export default {
     getAll,
     getById,
+    createSong
 }

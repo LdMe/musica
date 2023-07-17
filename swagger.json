@@ -1,0 +1,155 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "API de canciones",
+      "version": "1.0.2"
+    },
+    "host": "localhost:8080",
+    "basePath": "/api",
+    "paths": {
+      "/cancion": {
+        "get": {
+          "summary": "Obtener todas las canciones",
+          "description": "Función que obtiene todas las canciones. Requiere autenticación",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "description": "Introduzca el token JWT: 'Bearer `token`'",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Respuesta exitosa"
+            },
+            "400": {
+              "description": "Error en la solicitud"
+            },
+            "401": {
+              "description": "No está autorizado"
+            }
+          }
+        },
+        "post":{
+            "summary": "Crear una canción",
+            "description": "Función que crea una canción. Requiere autenticación",
+            "parameters":[
+                {
+                    "name": "Authorization",
+                    "in": "header",
+                    "required": true,
+                    "description": "Introduzca el token JWT: 'Bearer `token`'",
+                    "type": "string"
+                  },
+                {
+                    "name":"titulo",
+                    "in":"formData",
+                    "required":true,
+                    "description":"Introduzca el título de la canción",
+                    "type":"string"
+                },
+                {
+                    "name":"duracion",
+                    "in":"formData",
+                    "required":true,
+                    "description":"Introduzca la duración de la canción",
+                    "type":"integer"
+                },
+                {
+                    "name":"genero_id",
+                    "in":"formData",
+                    "required":true,
+                    "description":"Introduzca el id del género de la canción",
+                    "type":"integer"
+                }
+
+            ],
+            "responses": {
+                "200": {
+                  "description": "Respuesta exitosa"
+                },
+                "400": {
+                  "description": "Error en la solicitud"
+                },
+                "401": {
+                  "description": "No está autorizado"
+                }
+              }
+              
+        }
+      },
+      "/cancion/{id}": {
+        "get": {
+          "summary": "Obtener una canción",
+          "description": "Función que obtiene una canción. Requiere autenticación",
+          
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "Introduzca el id de la canción",
+              "type": "integer"
+            },
+            {
+              "name": "Authorization",
+              "in": "header",
+              "required": true,
+              "description": "Introduzca el token JWT: 'Bearer `token`'",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Respuesta exitosa"
+            },
+            "400": {
+              "description": "Error en la solicitud"
+            },
+            "401": {
+              "description": "No está autorizado"
+            }
+          }
+        }
+      },
+      "/login": {
+        "post": {
+          "summary": "Login",
+          "description": "Función que permite loguearse. Devuelve un token JWT",
+          "parameters": [
+            {
+              "name": "username",
+              "in": "formData",
+              "required": true,
+              "description": "Introduzca el nombre de usuario",
+              "type": "string"
+            },
+            {
+              "name": "password",
+              "in": "formData",
+              "required": true,
+              "description": "Introduzca la contraseña",
+              "type": "string",
+              "format":"password"
+
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Respuesta exitosa"
+            },
+            "400": {
+              "description": "Error en la solicitud"
+            },
+            "401": {
+              "description": "No está autorizado"
+            }
+          }
+        }
+      }
+
+    }
+  }
+  

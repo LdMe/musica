@@ -15,7 +15,7 @@ router.use("/cancion",isLoggedIn,cancionRouter);
 //router.use("/cancion",cancionRouter);
 router.use("/",usuarioRouter);
 
-router.use("/api/cancion",jwtMiddleware,cancionApiRouter);
+router.use("/api/cancion",cancionApiRouter);
 
 export default router;
 

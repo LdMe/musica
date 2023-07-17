@@ -80,10 +80,16 @@ async function getById2(id){
     return result;
 }
 
+async function createSong(cancion){
+    let result = await Cancion.create(cancion);
+    return result;
+}
+
 export default {
     getAll,
     getAll2,
     getById,
     getById2,
+    createSong
 }
 
